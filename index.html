@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自動中藥配藥機 - 主頁面</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "DFKai-SB", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            /* 使用淡藍色漸層背景，避免全白單調 */
+            background: linear-gradient(135deg, #f6f9fc, #e9eff5);
+        }
+        nav {
+            width: 220px;
+            background-color: #659cee;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+        }
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin-bottom: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            display: block;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        main {
+            margin-left: 240px;
+            padding: 20px;
+            flex: 1;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 80%; /* 預設寬度 */
+        }
+        @media (max-width: 768px) {
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                text-align: center;
+                display: none;
+            }
+            .menu-button {
+                display: block;
+                background-color: #659cee;
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+            main {
+                margin-left: 0;
+                padding: 10px;
+            }
+            .image-container img {
+                width: 100%; /* 手機版全屏顯示 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-button" onclick="toggleMenu()">☰ 選單</button>
+    
+    <nav id="nav-menu">
+        <h2>導航選單</h2>
+        <ul>
+            <li><a href="page1.html">功能介紹</a></li>
+            <li><a href="產品圖片.html">產品圖片</a></li>
+            <li><a href="page3.html">操作說明</a></li>
+            <li><a href="page4.html">常見問題</a></li>
+            <li><a href="聯絡我們.html">聯絡我們</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="image-container">
+            <img src="順泰中醫.jpg" alt="診所圖片">
+        </div>
+
+        <h1>關於我們</h1>
+        <p>
+            順泰中醫診所結合傳統中醫智慧與現代醫學技術，致力於調理身心、預防疾病。多年來，我們秉持著「以患者為中心」的理念，為每位求診者提供專業、貼心的診療服務，幫助您恢復健康與活力。
+        </p>
+
+        <section>
+            <h2>診療服務</h2>
+            <ul class="service-list">
+                <li>醫師診斷藥物治療
+                    <p>專業醫師進行診斷，根據病情開立適合的藥物，幫助患者恢復健康。</p>
+                </li>
+                <li>針灸與拔罐療法
+                    <p>透過針灸刺激穴位，促進氣血循環，並結合拔罐改善經絡堵塞。</p>
+                </li>
+                <li>草藥調理與配方
+                    <p>獨家調製草藥，舒緩部位疼痛，與各式湯藥(男女轉骨湯、四神湯、十全湯等等...)。</p>
+                </li>
+                <li>推拿按摩放鬆
+                    <p>運用中醫推拿技術，舒緩肌肉僵硬與疲勞，提高身體舒適度。</p>
+                </li>
+                <li>牽引拉伸舒展
+                    <p>適用於脊椎與關節調整，幫助恢復靈活性，減少疼痛感。</p>
+                </li>
+                <li>電療緩解肌肉
+                    <p>透過低頻電療促進血液循環，放鬆緊繃的肌肉，減輕不適。</p>
+                </li>
+                <li>健康管理與諮詢
+                    <p>提供個人化健康建議，幫助養成良好的生活與飲食習慣。</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="clinic-info">
+            <h3>診所資訊</h3>
+            <p><strong>電話：</strong> <a href="tel:047294699">04-7294699</a></p>
+            <p><strong>地址：</strong> 500彰化縣彰化市仁愛路110號1樓</p>
+            <h4>看診時段</h4>
+            <table>
+                <tr>
+                    <th></th><th>週一</th><th>週二</th><th>週三</th><th>週四</th><th>週五</th><th>週六</th><th>週日</th>
+                </tr>
+                <tr>
+                    <td>上午8:30 ~ 12:00</td><td>[ ✗ ]</td><td>⭕</td><td>⭕</td><td>⭕</td><td>⭕</td><td>[ ✗ ]</td><td>⭕</td>
+                </tr>
+                <tr>
+                    <td>下午3:00 ~ 6:00</td><td>⭕</td><td>⭕</td><td>[ ✗ ]</td><td>⭕</td><td>⭕</td><td>[ ✗ ]</td><td>[ ✗ ]</td>
+                </tr>
+                <tr>
+                    <td>晚上6:00 ~ 9:00</td><td>⭕</td><td>⭕</td><td>[ ✗ ]</td><td>⭕</td><td>⭕</td><td>[ ✗ ]</td><td>[ ✗ ]</td>
+                </tr>
+            </table>
+            <h5>休息時段造成不便敬請見諒!!</h5>
+        </section>
+    </main>
+    
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById("nav-menu");
+            if (nav.style.display === "block") {
+                nav.style.display = "none";
+            } else {
+                nav.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
