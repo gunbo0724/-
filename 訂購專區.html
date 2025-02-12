@@ -12,9 +12,9 @@
             background-color: #f9f9f9;
             text-align: center;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
+        .container { 
+            max-width: 1000px; /* 最大寬度：1000px */
+            margin: auto; 
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -100,7 +100,7 @@
             { name: "黨參", price: 450, image: "黨參.jpg" }
         ];
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        
+
         function addToCart(index) {
             let product = products[index];
             let existingItem = cart.find(item => item.name === product.name);
@@ -111,7 +111,7 @@
             }
             updateCart();
         }
-        
+
         function updateCart() {
             localStorage.setItem("cart", JSON.stringify(cart));
             let cartList = document.getElementById("cart-items");
@@ -130,7 +130,7 @@
             });
             document.getElementById("total-price").textContent = totalPrice;
         }
-        
+
         function changeQuantity(index, delta) {
             if (cart[index].quantity + delta <= 0) {
                 cart.splice(index, 1);
@@ -139,34 +139,34 @@
             }
             updateCart();
         }
-        
+
         async function goToCheckout() {
             if (cart.length === 0) {
                 alert("您的購物車是空的！");
                 return;
             }
-            
+
             const orderData = {
                 cart: cart,
                 total: document.getElementById("total-price").textContent,
                 timestamp: new Date()
             };
-            
+
             try {
                 const docRef = await addDoc(collection(db, "pending_orders"), orderData);
                 localStorage.setItem("orderId", docRef.id);
                 localStorage.removeItem("cart");
                 window.location.href = "訂單確認.html";
             } catch (error) {
-                alert("提交訂單失敗: " + error.message);
+                alert("提交訂單失敗: " + error.message);alert("提交訂單失敗: " + error.message);
             }
         }
-        
+
         function loadProducts() {
             let productList = document.getElementById("product-list");
             products.forEach((product, index) => {
                 let div = document.createElement("div");
-                div.className = "product-item";Div.ClassName =“ product-item”;
+                div.className = "product-item";
                 div.innerHTML = `<img src='${product.image}' alt='${product.name}'>
                                  <h3>${product.name}</h3>
                                  <p>$${product.price}</p>
@@ -174,7 +174,7 @@
                 productList.appendChild(div);
             });
         }
-        
+
         document.addEventListener("DOMContentLoaded", function() {
             loadProducts();
             updateCart();
@@ -185,4 +185,3 @@
     </div>
 </body>
 </html>
-
