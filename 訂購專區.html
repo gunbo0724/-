@@ -13,7 +13,7 @@
             text-align: center;
         }
         .container { 
-            max-width: 1000px; /* 最大寬度：1000px */
+            max-width: 1000px;
             margin: auto; 
             background: white;
             padding: 20px;
@@ -71,9 +71,10 @@
             <h2>購物車</h2>
             <ul class="cart-items" id="cart-items"></ul>
             <p><strong>總金額：</strong> $<span id="total-price">0</span></p>
-            <button class="checkout-button" onclick="goToCheckout()">前往結帳</button>
+            <button class="checkout-button" id="checkout-button">前往結帳</button>
         </div>
     </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
@@ -101,6 +102,7 @@
         ];
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+        // 加入購物車
         function addToCart(index) {
             let product = products[index];
             let existingItem = cart.find(item => item.name === product.name);
@@ -112,6 +114,7 @@
             updateCart();
         }
 
+        // 更新購物車
         function updateCart() {
             localStorage.setItem("cart", JSON.stringify(cart));
             let cartList = document.getElementById("cart-items");
@@ -131,6 +134,7 @@
             document.getElementById("total-price").textContent = totalPrice;
         }
 
+        // 更改數量
         function changeQuantity(index, delta) {
             if (cart[index].quantity + delta <= 0) {
                 cart.splice(index, 1);
@@ -140,6 +144,7 @@
             updateCart();
         }
 
+        // 前往結帳
         async function goToCheckout() {
             if (cart.length === 0) {
                 alert("您的購物車是空的！");
@@ -158,10 +163,11 @@
                 localStorage.removeItem("cart");
                 window.location.href = "訂單確認.html";
             } catch (error) {
-                alert("提交訂單失敗: " + error.message);alert("提交訂單失敗: " + error.message);
+                alert("提交訂單失敗: " + error.message);
             }
         }
 
+        // 加載商品
         function loadProducts() {
             let productList = document.getElementById("product-list");
             products.forEach((product, index) => {
@@ -175,13 +181,19 @@
             });
         }
 
+        // 頁面加載完成後執行
         document.addEventListener("DOMContentLoaded", function() {
             loadProducts();
             updateCart();
+
+            // 綁定結帳按鈕
+            document.getElementById("checkout-button").addEventListener("click", goToCheckout);
         });
     </script>
+
     <div class="return-box">
         <a href="index.html">返回主頁</a>
     </div>
 </body>
 </html>
+
