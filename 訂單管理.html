@@ -53,52 +53,66 @@
         <h1>訂單管理</h1>
         <div class="order-list" id="order-list"></div>
     </div>
-    <script>
-        function loadOrders() {
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlm7Ddtw63rhN4EtxtIKy9Q42cQjerozQ",
+            authDomain: "test-77bc4.firebaseapp.com",
+            projectId: "test-77bc4",
+            storageBucket: "test-77bc4.appspot.com",
+            messagingSenderId: "44373181938",
+            appId: "1:44373181938:web:28acb82ab8fe0641dfd76b",
+            measurementId: "G-MVBLB69MP0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadOrders() {
             let orderList = document.getElementById("order-list");
-            let orders = JSON.parse(localStorage.getItem("orders")) || [];
-            
-            if (orders.length === 0) {
-                orderList.innerHTML = "<p>目前沒有訂單。</p>";
-                return;
-            }
-            
-            orderList.innerHTML = "";
-            orders.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // 依據下單時間排序
-            
-            orders.forEach((order, index) => {
-                let div = document.createElement("div");
-                div.className = "order-item";
-                div.innerHTML = `<p><strong>訂單時間：</strong> ${new Date(order.timestamp).toLocaleString()}</p>
-                                 <p><strong>姓名：</strong> ${order.name}</p>
-                                 <p><strong>電話：</strong> ${order.phone}</p>
-                                 <p><strong>地址：</strong> ${order.address}</p>
-                                 <p><strong>付款方式：</strong> ${order.payment}</p>
-                                 <p><strong>總金額：</strong> $${order.total}</p>
-                                 <h3>訂單內容：</h3>`;
-                
-                order.cart.forEach(item => {
-                    let itemDetail = document.createElement("p");
-                    itemDetail.textContent = `${item.name} × ${item.quantity} - $${item.price * item.quantity}`;
-                    div.appendChild(itemDetail);
+            orderList.innerHTML = "<p>載入中...</p>";
+            try {
+                const querySnapshot = await getDocs(collection(db, "orders"));
+                if (querySnapshot.empty) {
+                    orderList.innerHTML = "<p>目前沒有訂單。</p>";
+                    return;
+                }
+                orderList.innerHTML = "";
+                querySnapshot.forEach(docSnapshot => {
+                    let order = docSnapshot.data();
+                    let div = document.createElement("div");
+                    div.className = "order-item";
+                    div.innerHTML = `<p><strong>訂單時間：</strong> ${new Date(order.timestamp.toDate()).toLocaleString()}</p>
+                                     <p><strong>姓名：</strong> ${order.name}</p>
+                                     <p><strong>電話：</strong> ${order.phone}</p>
+                                     <p><strong>地址：</strong> ${order.address}</p>
+                                     <p><strong>付款方式：</strong> ${order.payment}</p>
+                                     <p><strong>總金額：</strong> $${order.total}</p>
+                                     <h3>訂單內容：</h3>`;
+                    order.cart.forEach(item => {
+                        let itemDetail = document.createElement("p");
+                        itemDetail.textContent = `${item.name} × ${item.quantity} - $${item.price * item.quantity}`;
+                        div.appendChild(itemDetail);
+                    });
+                    let completeButton = document.createElement("button");
+                    completeButton.className = "complete-button";
+                    completeButton.textContent = "標記為已完成";
+                    completeButton.onclick = async function() {
+                        await deleteDoc(doc(db, "orders", docSnapshot.id));
+                        alert("訂單已標記為完成！");
+                        loadOrders();
+                    };
+                    div.appendChild(completeButton);
+                    orderList.appendChild(div);
                 });
-                
-                let completeButton = document.createElement("button");
-                completeButton.className = "complete-button";
-                completeButton.textContent = "標記為已完成";
-                completeButton.onclick = function() {
-                    orders.splice(index, 1);
-                    localStorage.setItem("orders", JSON.stringify(orders));
-                    alert("訂單已標記為完成！");
-                    loadOrders();
-                };
-                div.appendChild(completeButton);
-                
-                orderList.appendChild(div);
-            });
+            } catch (error) {
+                orderList.innerHTML = "<p>載入訂單時發生錯誤：" + error.message + "</p>";
+            }
         }
-        
         document.addEventListener("DOMContentLoaded", loadOrders);
     </script>
-</body>
+</body> 
 </html>
