@@ -142,6 +142,9 @@
         // 提交訂單
         document.getElementById("order-form").addEventListener("submit", function(event) {
             event.preventDefault();
+            
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            
             let orderData = {
                 name: document.getElementById("name").value,
                 phone: document.getElementById("phone").value,
