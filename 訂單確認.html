@@ -113,7 +113,7 @@
             let orderDetails = document.getElementById("order-details");
             let totalPrice = 0;
             orderDetails.innerHTML = "";
-            cart.forEach(item => {
+            cart.forEach(item => {cart.foreach（item => {
                 totalPrice += item.price * item.quantity;
                 let div = document.createElement("div");
                 div.className = "order-item";
