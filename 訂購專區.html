@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訂購專區 - 順泰中醫</title>
-    <style> 
-        body {
-            font-family: "DFKai-SB", Arial, sans-serif;
+    <style>  
+        body { 
+            font-family: "DFKai-SB", Arial, sans-serif; 
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
@@ -162,14 +162,14 @@
                 localStorage.setItem("orderId", docRef.id);
                 localStorage.removeItem("cart");
                 window.location.href = "訂單確認.html";
-            } catch (error) {} catch（錯誤）{
+            } catch (error) {
                 alert("提交訂單失敗: " + error.message);
             }
         }
 
         // 加載商品
         function loadProducts() {
-            let productList = document.getElementById("product-list");
+            let productList = document.getElementById("product-list");令ProductList = document.getElementById（“ product-list”）;
             products.forEach((product, index) => {
                 let div = document.createElement("div");
                 div.className = "product-item";
@@ -196,3 +196,4 @@
     </div>
 </body>
 </html>
+
