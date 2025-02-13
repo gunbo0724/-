@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訂單確認 - 順泰中醫</title> 
+    <title>訂單確認 - 順泰中醫</title>  
     <style>  
-        body { 
+        body {  
             font-family: "DFKai-SB", Arial, sans-serif; 
             margin: 0;
             padding: 20px;
@@ -101,7 +101,7 @@
             appId: "1:44373181938:web:28acb82ab8fe0641dfd76b",
             measurementId: "G-MVBLB69MP0"
         };
-
+最大寬度：600px;
         // 初始化 Firebase 和 Firestore
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -125,7 +125,7 @@
         
         // 提交訂單
         document.getElementById("order-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+            event.preventDefault();event.preventDefault（）;
             let orderData = {
                 name: document.getElementById("name").value,
                 phone: document.getElementById("phone").value,
@@ -144,11 +144,12 @@
             }).catch(error => {
                 alert("提交訂單失敗：" + error.message);
             });
-        });});});});
+        });
         
         // 頁面加載時顯示訂單詳情
         document.addEventListener("DOMContentLoaded", displayOrderDetails);
     </script>
 </body> 
 </html>
+
 
