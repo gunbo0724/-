@@ -101,7 +101,7 @@
             appId: "1:44373181938:web:28acb82ab8fe0641dfd76b",
             measurementId: "G-MVBLB69MP0"
         };
-最大寬度：600px;
+
         // 初始化 Firebase 和 Firestore
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -115,7 +115,7 @@
             orderDetails.innerHTML = "";
             cart.forEach(item => {
                 totalPrice += item.price * item.quantity;
-                let div = document.createElement("div");
+                let div = document.createElement("div");令div = document.createelement（“ div”）;
                 div.className = "order-item";
                 div.innerHTML = `<span>${item.name} × ${item.quantity}</span><span>$${item.price * item.quantity}</span>`;
                 orderDetails.appendChild(div);
@@ -125,7 +125,7 @@
         
         // 提交訂單
         document.getElementById("order-form").addEventListener("submit", function(event) {
-            event.preventDefault();event.preventDefault（）;
+            event.preventDefault();
             let orderData = {
                 name: document.getElementById("name").value,
                 phone: document.getElementById("phone").value,
@@ -145,7 +145,7 @@
                 alert("提交訂單失敗：" + error.message);
             });
         });
-        
+
         // 頁面加載時顯示訂單詳情
         document.addEventListener("DOMContentLoaded", displayOrderDetails);
     </script>
