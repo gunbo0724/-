@@ -10,9 +10,9 @@
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
-            text-align: center;
+            text-align: center; 
         }
-        .container { 
+        .container {  
             max-width: 600px;
             margin: auto; 
             background: white;
@@ -89,38 +89,22 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDlm7Ddtw63rhN4EtxtIKy9Q42cQjerozQ",
-            authDomain: "test-77bc4.firebaseapp.com",
-            projectId: "test-77bc4",
-            storageBucket: "test-77bc4.firebasestorage.app",
-            messagingSenderId: "44373181938",
-            appId: "1:44373181938:web:28acb82ab8fe0641dfd76b",
-            measurementId: "G-MVBLB69MP0"
-        };
-
-        // 初始化 Firebase 和 Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
+        // 這裡需要從 localStorage 讀取購物車資料
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
         // 顯示訂單詳情
         function displayOrderDetails() {
             let orderDetails = document.getElementById("order-details");
             let totalPrice = 0;
-            orderDetails.innerHTML = "";
+            orderDetails.innerHTML = "";  // 清空目前顯示的資料
             cart.forEach(item => {
-                totalPrice += item.price * item.quantity;
+                totalPrice += item.price * item.quantity;totalprice += item.price * item.quantity;
                 let div = document.createElement("div");
                 div.className = "order-item";
                 div.innerHTML = `<span>${item.name} × ${item.quantity}</span><span>$${item.price * item.quantity}</span>`;
-                orderDetails.appendChild(div);
+                orderDetails.appendChild(div);  // 顯示每個商品項目
             });
-            document.getElementById("total-price").textContent = totalPrice;
+            document.getElementById("total-price").textContent = totalPrice; // 顯示總金額
         }
         
         // 提交訂單
