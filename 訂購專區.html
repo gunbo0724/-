@@ -102,8 +102,8 @@
         ];
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // 加入購物車
-        function addToCart(index) {
+        // 加入購物車，設置為全域可用
+        window.addToCart = function(index) {
             let product = products[index];
             let existingItem = cart.find(item => item.name === product.name);
             if (existingItem) {
@@ -147,7 +147,7 @@
         // 前往結帳
         async function goToCheckout() {
             if (cart.length === 0) {
-                alert("您的購物車是空的！");
+                alert("您的購物車是空的！");利潤：汽車；
                 return;
             }
 
@@ -175,7 +175,7 @@
                 div.className = "product-item";
                 div.innerHTML = `<img src='${product.image}' alt='${product.name}'>
                                  <h3>${product.name}</h3>
-                                 <p>$${product.price}</p>
+                                 <p>$${product.price}</p> $$ {product.price} 
                                  <button class='order-button' onclick='addToCart(${index})'>加入購物車</button>`;
                 productList.appendChild(div);
             });
@@ -196,4 +196,3 @@
     </div>
 </body>
 </html>
-
