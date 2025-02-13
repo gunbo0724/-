@@ -138,12 +138,36 @@
                 alert("讀取訂單失敗：" + error.message);
             }
         }
-        
+
+        // 提交訂單
+        document.getElementById("order-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let orderData = {
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+                payment: document.getElementById("payment").value,
+                cart: cart,
+                total: document.getElementById("total-price").textContent,
+                timestamp: new Date()
+            };
+
+            // 儲存訂單到 Firebase Firestore
+            addDoc(collection(db, "orders"), orderData).then(() => {
+                localStorage.removeItem("cart"); // 清空購物車
+                alert("訂單已提交！");
+                window.location.href = "index.html"; // 跳轉回主頁
+            }).catch(error => {
+                alert("提交訂單失敗：" + error.message);
+            });
+        });
+
         // 頁面加載時顯示訂單詳情
         document.addEventListener("DOMContentLoaded", displayOrderDetails);
     </script>
 </body> 
 </html>
+
 
 
 
